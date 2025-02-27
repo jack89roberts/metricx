@@ -655,7 +655,7 @@ wheels = [
 [[package]]
 name = "metricx"
 version = "0.1.0"
-source = { virtual = "." }
+source = { editable = "." }
 dependencies = [
     { name = "datasets" },
     { name = "protobuf" },
@@ -670,11 +670,11 @@ eval = [
 
 [package.metadata]
 requires-dist = [
-    { name = "datasets", specifier = ">=3.3.2" },
+    { name = "datasets" },
     { name = "mt-metrics-eval", marker = "extra == 'eval'", git = "https://github.com/google-research/mt-metrics-eval" },
-    { name = "protobuf", specifier = ">=5.29.3" },
-    { name = "sentencepiece", specifier = ">=0.2.0" },
-    { name = "transformers", extras = ["torch"], specifier = ">=4.49.0" },
+    { name = "protobuf" },
+    { name = "sentencepiece" },
+    { name = "transformers", extras = ["torch"] },
 ]
 
 [[package]]

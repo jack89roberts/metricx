@@ -5,10 +5,10 @@ description = "pip installable, packaged fork of the Google Research  metricx re
 readme = "README.md"
 requires-python = ">=3.11"
 dependencies = [
-    "datasets>=3.3.2",
-    "protobuf>=5.29.3",
-    "sentencepiece>=0.2.0",
-    "transformers[torch]>=4.49.0",
+    "datasets",
+    "protobuf",
+    "sentencepiece",
+    "transformers[torch]",
 ]
 
 [project.optional-dependencies]

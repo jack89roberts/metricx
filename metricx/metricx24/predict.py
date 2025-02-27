@@ -62,7 +62,11 @@ class Arguments:
 
 
 def get_dataset(
-    input_file: str, tokenizer, max_input_length: int, device, is_qe: bool
+    input_file: str,
+    tokenizer,
+    max_input_length: int,
+    is_qe: bool,
+    device: str | torch.device | None = None,
 ):
   """Gets the test dataset for prediction.
 
@@ -151,8 +155,8 @@ def main() -> None:
       args.input_file,
       tokenizer,
       args.max_input_length,
-      device,
       args.qe,
+      device,
   )
 
   training_args = transformers.TrainingArguments(

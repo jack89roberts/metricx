@@ -1,31 +1,30 @@
-# MetricX
+# Changes in this fork
 
-## Jack: My changes
+**Only tested on predicting with metricx24**
 
 - Requirements:
-  - `mt-metrics-eval` is failing to build/install due to a sub-dependency so removed
+  - `mt-metrics-eval` is currently failing to build/install due to a sub-dependency so moved to an optional "eval" dependency group.
   - unpinned all versions
   - added protobuf
 
-- Force cpu to be used by trainer (not tried mps, but original script put some things on cpu and others on mps due to transformers defaults)
+- Made metricx into an installable package with commands `metricx24-predict`, `metricx24-evaluate`, `metricx23-predict`, `metricx23-evaluate` (these replace `python -m metricx24.predict` etc. in the original readme below).
 
-- Added a basic `input.jsonl` example file
+- Predict script for metricx24 (which outputs `output.jsonl`):
+  - Force cpu to be used by trainer (not tried mps, but original script put some things on cpu and others on mps due to transformers defaults)
+  - Added a basic `input.jsonl` example file
+  - Run this command (output file needs to contain a directory to work, i.e. `output.jsonl` raises an error but `./output.jsonl` is ok):
+  ```bash
+  metricx24-predict \
+    --tokenizer google/mt5-xl \
+    --model_name_or_path google/metricx-24-hybrid-xl-v2p6 \
+    --max_input_length 1536 \
+    --batch_size 1 \
+    --input_file input.jsonl \
+    --output_file "./output.jsonl"
+  ```
 
-- Run this command (output file needs to contain a directory to work, i.e. `output.jsonl` raises an error but `./output.jsonl` is ok):
 
-```
-python -m metricx24.predict \
-  --tokenizer google/mt5-xl \
-  --model_name_or_path google/metricx-24-hybrid-xl-v2p6 \
-  --max_input_length 1536 \
-  --batch_size 1 \
-  --input_file input.jsonl \
-  --output_file "./output.jsonl"
-```
-
-- Which outputs `output.jsonl`. Note that for MetricX lower is better!
-
-## Original README
+# MetricX (Original README)
 
 *This is not an officially supported Google product.*
 

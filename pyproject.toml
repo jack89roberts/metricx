@@ -1,0 +1,28 @@
+[project]
+name = "metricx"
+version = "0.1.0"
+description = "pip installable, packaged fork of the Google Research  metricx repo: https://github.com/google-research/metricx"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "datasets>=3.3.2",
+    "protobuf>=5.29.3",
+    "sentencepiece>=0.2.0",
+    "transformers[torch]>=4.49.0",
+]
+
+[project.optional-dependencies]
+eval = ["mt-metrics-eval"]
+
+[tool.uv.sources]
+mt-metrics-eval = {git = "https://github.com/google-research/mt-metrics-eval"}
+
+[project.scripts]
+metricx23-predict = "metricx.metricx23.predict:main"
+metricx23-evaluate = "metricx.metricx23.evaluate:main"
+metricx24-predict = "metricx.metricx24.predict:main"
+metricx24-evaluate = "metricx.metricx24.evaluate:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"

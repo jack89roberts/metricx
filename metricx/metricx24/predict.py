@@ -19,7 +19,7 @@ import json
 import os
 
 import datasets
-from metricx23 import models
+from metricx.metricx24 import models
 import torch
 import transformers
 
@@ -83,14 +83,16 @@ def get_dataset(
   def _make_input(example):
     if is_qe:
       example["input"] = (
-          "candidate: "
-          + example["hypothesis"]
-          + " source: "
+          "source: "
           + example["source"]
+          + " candidate: "
+          + example["hypothesis"]
       )
     else:
       example["input"] = (
-          "candidate: "
+          "source: "
+          + example["source"]
+          + " candidate: "
           + example["hypothesis"]
           + " reference: "
           + example["reference"]
@@ -130,13 +132,18 @@ def main() -> None:
   if torch.cuda.is_available():
     device = torch.device("cuda")
     per_device_batch_size = args.batch_size // torch.cuda.device_count()
+    use_cpu = False
   else:
     device = torch.device("cpu")
     per_device_batch_size = args.batch_size
+    use_cpu = True
 
   tokenizer = transformers.AutoTokenizer.from_pretrained(args.tokenizer)
 
-  model = models.MT5ForRegression.from_pretrained(args.model_name_or_path)
+  model = models.MT5ForRegression.from_pretrained(
+      args.model_name_or_path, torch_dtype="auto"
+  )
+
   model.to(device)
   model.eval()
 
@@ -152,6 +159,7 @@ def main() -> None:
       output_dir=os.path.dirname(args.output_file),
       per_device_eval_batch_size=per_device_batch_size,
       dataloader_pin_memory=False,
+      use_cpu=use_cpu,
   )
   trainer = transformers.Trainer(
       model=model,

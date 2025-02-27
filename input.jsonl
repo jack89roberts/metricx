@@ -1,0 +1,4 @@
+{"source": "Je voudrais une pomme s'il vous plaît", "hypothesis": "I want an apple", "reference": "I would like an apple please"}
+{"source": "Je voudrais une pomme s'il vous plaît", "hypothesis": "I hate oranges", "reference": "I would like an apple please"}
+{"source": "Je voudrais une pomme s'il vous plaît", "hypothesis": "I would like an apple please", "reference": "I would like an apple please"}
+

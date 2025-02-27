@@ -132,9 +132,11 @@ def main() -> None:
   if torch.cuda.is_available():
     device = torch.device("cuda")
     per_device_batch_size = args.batch_size // torch.cuda.device_count()
+    use_cpu = False
   else:
     device = torch.device("cpu")
     per_device_batch_size = args.batch_size
+    use_cpu = True
 
   tokenizer = transformers.AutoTokenizer.from_pretrained(args.tokenizer)
 
@@ -157,6 +159,7 @@ def main() -> None:
       output_dir=os.path.dirname(args.output_file),
       per_device_eval_batch_size=per_device_batch_size,
       dataloader_pin_memory=False,
+      use_cpu=use_cpu,
   )
   trainer = transformers.Trainer(
       model=model,

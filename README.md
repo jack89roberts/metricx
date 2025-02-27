@@ -11,7 +11,7 @@
 
 - Added a basic `input.jsonl` example file
 
-- Run this command (output file needs to contain a directory to work, i.e. "output.jsonl" raises an error but "./output.jsonl" is ok):
+- Run this command (output file needs to contain a directory to work, i.e. `output.jsonl` raises an error but `./output.jsonl` is ok):
 
 ```
 python -m metricx24.predict \

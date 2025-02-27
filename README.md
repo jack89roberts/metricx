@@ -25,7 +25,7 @@ python -m metricx24.predict \
 
 - Which outputs `output.jsonl`. Note that for MetricX lower is better!
 
-## Original README
+## Original README
 
 *This is not an officially supported Google product.*
 

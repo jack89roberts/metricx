@@ -117,7 +117,6 @@ def get_dataset(
     return example
 
   ds = datasets.load_dataset("json", data_files={"test": input_file})
-  print("first load", len(ds["test"]))
   ds = ds.map(_make_input)
   ds = ds.map(_tokenize)
   ds = ds.map(_remove_eos)
@@ -127,7 +126,6 @@ def get_dataset(
       device=device,
       output_all_columns=True,
   )
-  print("pre-return", len(ds["test"]))
   return ds
 
 
